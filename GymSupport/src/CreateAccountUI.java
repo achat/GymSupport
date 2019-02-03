@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 
 public class CreateAccountUI extends javax.swing.JFrame {
 
+    SaveUserToJson sutj=new SaveUserToJson();
     /**
      * Creates new form CreateAccountUI
      */
@@ -194,19 +195,12 @@ public class CreateAccountUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try{
-        User u=new User(jTextField1.getText(),jTextField5.getText(),jTextField2.getText(),jTextField6.getText(),Integer.parseInt(jTextField3.getText()),jTextField7.getText(),Integer.parseInt(jTextField4.getText()),Integer.parseInt(jTextField8.getText()));
-                       JOptionPane.showMessageDialog(null, "Account Created!", "Success", JOptionPane.INFORMATION_MESSAGE);
-                       
-this.dispose();
-
-        }
-        catch(IllegalArgumentException e){
+        try{   
+        sutj.saveUserToJson(jTextField1.getText(),jTextField5.getText(),jTextField2.getText(),jTextField6.getText(),Integer.parseInt(jTextField3.getText()),jTextField7.getText(),Integer.parseInt(jTextField4.getText()),Integer.parseInt(jTextField8.getText()));
+        }catch(NumberFormatException e){
                        JOptionPane.showMessageDialog(null, "Please enter your info correctly!", "Failure", JOptionPane.INFORMATION_MESSAGE);
-this.dispose();
-        }
-    
-     
+}      
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
    

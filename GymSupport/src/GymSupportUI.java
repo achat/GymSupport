@@ -1,4 +1,7 @@
 
+import java.io.*;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,11 +14,12 @@
  */
 public class GymSupportUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GymSupportUI
-     */
-    public GymSupportUI() {
+    CreateUserFromJson cufj=new CreateUserFromJson();
+    
+    public GymSupportUI() throws UnsupportedEncodingException, FileNotFoundException {
         initComponents();
+        cufj.createUserFromJson();
+       
     }
 
     /**
@@ -161,7 +165,11 @@ public class GymSupportUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                try{
                 new GymSupportUI().setVisible(true);
+                }
+catch (FileNotFoundException ex) {        }
+                catch(UnsupportedEncodingException e){}
             }
         });
     }

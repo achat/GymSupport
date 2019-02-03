@@ -28,6 +28,38 @@ public class User {
         this.height = height;
         this.weight = weight;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
     
     
 }
