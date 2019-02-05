@@ -17,8 +17,9 @@ public class User {
     private String gender;
     private int height;
     private int weight;
+    private String pass;
 
-    public User(String username, String mail, String name, String surname, int age, String gender, int height, int weight) {
+    public User(String username, String mail, String name, String surname, int age, String gender, int height, int weight,String pass) {
         this.username = username;
         this.mail = mail;
         this.name = name;
@@ -27,12 +28,15 @@ public class User {
         this.gender = gender;
         this.height = height;
         this.weight = weight;
+        this.pass=pass;
     }
 
     public String getUsername() {
         return username;
     }
-
+ public String getPass() {
+        return pass;
+    }
     public String getMail() {
         return mail;
     }

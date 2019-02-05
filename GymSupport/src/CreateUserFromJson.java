@@ -11,6 +11,7 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 
 public class CreateUserFromJson {
+    
     public void createUserFromJson() throws UnsupportedEncodingException
     {
         try{
@@ -23,6 +24,7 @@ Reader r = new InputStreamReader(is, "UTF-8");
           JsonElement e = p.next();
           if (e.isJsonObject()) {
               User u = gson.fromJson(e, User.class);
+              UserList.addUser(u);
           }
         
        }
