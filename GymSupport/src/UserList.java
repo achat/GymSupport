@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 /*
@@ -12,26 +11,55 @@ import java.util.ArrayList;
  * @author nikos
  */
 public class UserList {
-    private static ArrayList<User> userList=new ArrayList<User>();
+    
+    private static UserList instance;
+    
+    private ArrayList<User> userList=new ArrayList<User>();
 
-    public static ArrayList<User> getUserList() {
+    public ArrayList<User> getUserList() {
         return userList;
     }
     
+    private UserList() {
+        
+    }
     
-    public static void addUser(User u)
+    public static UserList getInstance() {
+        if (instance == null) {
+            instance = new UserList();
+        }
+        return instance;
+    }
+    
+    
+    public void addUser(User u)
     {
         userList.add(u);
     }
-     public static User find(String username, String password)
-     {
-         for(User u: userList)
-         {
-             if (u.getUsername().equals(username) && (u.getPass().equals(password)))
-                     {
-                        return u;
-                     }
-         }
-         return null;
-     }
+    
+    
+    public User find(String username, String password)
+    {
+        for(User u: userList)
+        {
+            if (u.getUsername().equals(username) && (u.getPass().equals(password)))
+                    {
+                       return u;
+                    }
+        }
+        return null;
+    }
+    
+    
+    public int checkLoginUser(String username) 
+    {
+        for(User u: userList)
+        {
+            if (u.getUsername().equals(username))
+                    {
+                       return 1;
+                    }
+        }
+        return 0;
+    }
 }

@@ -135,7 +135,7 @@ public class MyProfile extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                       JOptionPane.showMessageDialog(null, "Not yet implemented!", "Failure", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Not yet implemented!", "Failure", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -157,13 +157,13 @@ public class MyProfile extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void writeInfo(User u) {
-jLabel1.setText(u.getUsername());
-jLabel2.setText(u.getName());
-jLabel3.setText(u.getSurname());
-jLabel4.setText(u.getMail());
-jLabel5.setText(u.getGender());
-jLabel6.setText(Integer.toString(u.getAge())+" years");
-jLabel7.setText(Integer.toString(u.getHeight())+" cm");
-jLabel8.setText(Integer.toString(u.getWeight())+" kg");
+        jLabel1.setText(u.getUsername());
+        jLabel2.setText(u.getName());
+        jLabel3.setText(u.getSurname());
+        jLabel4.setText(u.getMail());
+        jLabel5.setText(u.getGender());
+        jLabel6.setText(Integer.toString(u.getAge())+" years");
+        jLabel7.setText(Integer.toString(u.getHeight())+" cm");
+        jLabel8.setText(Integer.toString(u.getWeight())+" kg");
     }
 }

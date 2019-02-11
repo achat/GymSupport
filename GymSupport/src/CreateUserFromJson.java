@@ -15,19 +15,21 @@ public class CreateUserFromJson {
     public void createUserFromJson() throws UnsupportedEncodingException
     {
         try{
-        InputStream is = new FileInputStream("Users.json");
-Reader r = new InputStreamReader(is, "UTF-8");
-       Gson gson = new GsonBuilder().create();
-       JsonStreamParser p = new JsonStreamParser(r);
+            InputStream is = getClass().getResourceAsStream("/datasource/Users.jsn");
+            Reader r = new InputStreamReader(is, "UTF-8");
+            Gson gson = new GsonBuilder().create();
+            JsonStreamParser p = new JsonStreamParser(r);
 
-       while (p.hasNext()) {
-          JsonElement e = p.next();
-          if (e.isJsonObject()) {
-              User u = gson.fromJson(e, User.class);
-              UserList.addUser(u);
-          }
-        
-       }
-}catch (FileNotFoundException e){}
+            while (p.hasNext()) {
+               JsonElement e = p.next();
+               if (e.isJsonObject()) {
+                   User u = gson.fromJson(e, User.class);
+                   UserList.getInstance().addUser(u);
+               }
+
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 }
