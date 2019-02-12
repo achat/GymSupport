@@ -1,4 +1,5 @@
 
+import java.awt.Image;
 import java.io.*;
 import java.net.URL;
 import java.util.Locale;
@@ -22,12 +23,16 @@ public class GymSupportUI extends javax.swing.JFrame {
     
     public GymSupportUI() throws UnsupportedEncodingException, FileNotFoundException {
         URL iconURL = getClass().getResource("/resources/weightlifting.png");
-        ImageIcon img = new ImageIcon(iconURL);
-        this.setIconImage(img.getImage());
+        ImageIcon icon = new ImageIcon(iconURL);
+        this.setIconImage(icon.getImage());
         initComponents();
         profileContainerPanel.setVisible(false);
         this.setLocationRelativeTo(null);
         cufj.createUserFromJson();
+        ImageIcon imgProfile = new javax.swing.ImageIcon(getClass().getResource("/resources/user-black-shape.png"));
+        Image scaledImg = imgProfile.getImage().getScaledInstance(profilePhotoLabel.getWidth(), profilePhotoLabel.getHeight(),Image.SCALE_SMOOTH);
+        profilePhotoLabel.setIcon(new ImageIcon(scaledImg));
+        this.setResizable(false);
     }
     
     public JPanel getProfilePanel() {
@@ -35,7 +40,15 @@ public class GymSupportUI extends javax.swing.JFrame {
     }
     
     public void writeProfileInfo(User u) {
-        profileLabel.setText(u.getUsername());
+        usernameText.setText(u.getUsername());
+        pwdText.setText(u.getPass());
+        emailText.setText(u.getMail());
+        nameText.setText(u.getName());
+        surnameText.setText(u.getSurname());
+        genderCombo.setSelectedItem(u.getGender());
+        ageText.setText(String.valueOf(u.getAge()));
+        weightText.setText(String.valueOf(u.getWeight()));
+        heightText.setText(String.valueOf(u.getHeight()));
     }
             
 
@@ -58,7 +71,27 @@ public class GymSupportUI extends javax.swing.JFrame {
         statusPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         profileContainerPanel = new javax.swing.JPanel();
-        profileLabel = new javax.swing.JLabel();
+        profilePhotoLabel = new javax.swing.JLabel();
+        weightText = new javax.swing.JFormattedTextField();
+        jLabel10 = new javax.swing.JLabel();
+        ageText = new javax.swing.JFormattedTextField();
+        heightText = new javax.swing.JFormattedTextField();
+        jLabel8 = new javax.swing.JLabel();
+        usernameText = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        emailText = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        surnameText = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        nameText = new javax.swing.JTextField();
+        pwdText = new javax.swing.JPasswordField();
+        genderCombo = new javax.swing.JComboBox<>();
+        requestWorkout = new javax.swing.JButton();
+        updateProfileBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 51, 51));
@@ -117,7 +150,63 @@ public class GymSupportUI extends javax.swing.JFrame {
             .addComponent(jLabel3)
         );
 
-        profileLabel.setText("Profile");
+        profileContainerPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder(null, java.awt.Color.lightGray));
+
+        profilePhotoLabel.setToolTipText("");
+
+        weightText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        weightText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        weightText.setText("0");
+        weightText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                weightTextActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("weight in kg");
+
+        ageText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        ageText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        ageText.setText("0");
+
+        heightText.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        heightText.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        heightText.setText("0");
+
+        jLabel8.setText("username");
+
+        jLabel7.setText("mail");
+
+        jLabel9.setText("surname");
+
+        jLabel5.setText("age");
+
+        jLabel6.setText("height in cm");
+
+        jLabel11.setText("password");
+
+        jLabel4.setText("name");
+
+        jLabel12.setText("gender");
+
+        genderCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
+        genderCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genderComboActionPerformed(evt);
+            }
+        });
+
+        requestWorkout.setText("Request Workout");
+
+        updateProfileBtn.setBackground(new java.awt.Color(204, 204, 204));
+        updateProfileBtn.setForeground(new java.awt.Color(204, 0, 51));
+        updateProfileBtn.setText("Update Profile");
+        updateProfileBtn.setActionCommand("Update");
+        updateProfileBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateProfileBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout profileContainerPanelLayout = new javax.swing.GroupLayout(profileContainerPanel);
         profileContainerPanel.setLayout(profileContainerPanelLayout);
@@ -125,15 +214,84 @@ public class GymSupportUI extends javax.swing.JFrame {
             profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profileContainerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(profileLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(profilePhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel8)
+                    .addGroup(profileContainerPanelLayout.createSequentialGroup()
+                        .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addGap(15, 15, 15)
+                        .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(usernameText)
+                                .addComponent(surnameText)
+                                .addComponent(ageText, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                                .addComponent(heightText, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(emailText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
+                        .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(profileContainerPanelLayout.createSequentialGroup()
+                                .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel10))
+                                .addGap(26, 26, 26)
+                                .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(weightText, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(nameText, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                        .addComponent(pwdText)
+                                        .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(requestWorkout, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)))
+                    .addComponent(updateProfileBtn))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         profileContainerPanelLayout.setVerticalGroup(
             profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(profileContainerPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(profileLabel)
-                .addContainerGap(378, Short.MAX_VALUE))
+                .addComponent(profilePhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(usernameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11)
+                    .addComponent(pwdText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(profileContainerPanelLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel4)
+                            .addComponent(nameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, profileContainerPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
+                .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(surnameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel10)
+                    .addComponent(ageText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(weightText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(heightText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(requestWorkout))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addComponent(updateProfileBtn)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -151,7 +309,7 @@ public class GymSupportUI extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(profileContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -167,7 +325,7 @@ public class GymSupportUI extends javax.swing.JFrame {
                         .addGap(68, 68, 68)
                         .addComponent(logInBtn))
                     .addComponent(profileContainerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(statusPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -208,8 +366,20 @@ public class GymSupportUI extends javax.swing.JFrame {
     }//GEN-LAST:event_createAccountBtnActionPerformed
 
     private void logInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInBtnActionPerformed
-      new LoginScreen();
+      new LoginScreen(this);
     }//GEN-LAST:event_logInBtnActionPerformed
+
+    private void weightTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_weightTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_weightTextActionPerformed
+
+    private void genderComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_genderComboActionPerformed
+
+    private void updateProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateProfileBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_updateProfileBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -252,16 +422,36 @@ public class GymSupportUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField ageText;
     private javax.swing.JButton createAccountBtn;
+    private javax.swing.JTextField emailText;
+    private javax.swing.JComboBox<String> genderCombo;
+    private javax.swing.JFormattedTextField heightText;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JButton logInBtn;
+    private javax.swing.JTextField nameText;
     private javax.swing.JPanel profileContainerPanel;
-    private javax.swing.JLabel profileLabel;
+    private javax.swing.JLabel profilePhotoLabel;
+    private javax.swing.JPasswordField pwdText;
+    private javax.swing.JButton requestWorkout;
     private javax.swing.JPanel statusPanel;
+    private javax.swing.JTextField surnameText;
+    private javax.swing.JButton updateProfileBtn;
+    private javax.swing.JTextField usernameText;
+    private javax.swing.JFormattedTextField weightText;
     // End of variables declaration//GEN-END:variables
 }

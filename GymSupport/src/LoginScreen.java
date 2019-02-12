@@ -15,11 +15,23 @@ import javax.swing.JOptionPane;
  */
 public class LoginScreen extends javax.swing.JDialog {
 
- 
+    private GymSupportUI mainFrame;
     /**
      * Creates new form LoginScreen
      */
     public LoginScreen() {
+        URL iconURL = getClass().getResource("/resources/weightlifting.png");
+        ImageIcon img = new ImageIcon(iconURL);
+        this.setIconImage(img.getImage());
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setModal(true);
+        this.setVisible(true);
+    }
+    
+    
+    public LoginScreen(GymSupportUI mainFrame) {
+        this.mainFrame = mainFrame;
         URL iconURL = getClass().getResource("/resources/weightlifting.png");
         ImageIcon img = new ImageIcon(iconURL);
         this.setIconImage(img.getImage());
@@ -129,7 +141,9 @@ public class LoginScreen extends javax.swing.JDialog {
         User u = UserList.getInstance().find(usernameText.getText(), pwdText.getText());
         if(u != null)
         {
-            new MyProfile(u);
+            this.mainFrame.getProfilePanel().setVisible(true);
+            this.mainFrame.writeProfileInfo(u);
+            //new MyProfile(u);
             this.dispose();
         }
         else
