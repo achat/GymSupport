@@ -197,6 +197,11 @@ public class GymSupportUI extends javax.swing.JFrame {
         });
 
         requestWorkout.setText("Request Workout");
+        requestWorkout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                requestWorkoutActionPerformed(evt);
+            }
+        });
 
         updateProfileBtn.setBackground(new java.awt.Color(204, 204, 204));
         updateProfileBtn.setForeground(new java.awt.Color(204, 0, 51));
@@ -380,6 +385,12 @@ public class GymSupportUI extends javax.swing.JFrame {
     private void updateProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateProfileBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_updateProfileBtnActionPerformed
+
+    private void requestWorkoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestWorkoutActionPerformed
+        // TODO add your handling code here:
+        Workout w = new Workout(this, true);
+        w.setVisible(true);
+    }//GEN-LAST:event_requestWorkoutActionPerformed
 
     /**
      * @param args the command line arguments

@@ -1,0 +1,14 @@
+{
+    "programid":"womenprogram2",
+    "name":"WomenLean",
+    "caloriesperday":1800,
+    "daysoftraining":5,
+    "trainer":"",
+    "workout":{"Running":"10min",
+               "ChestPress":"3x8",	
+               "Squats":"3x10",
+               "abPlanks":"90secs(orfailure)",
+               "PushUps":"4x5"
+            }
+}
+			

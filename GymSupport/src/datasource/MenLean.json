@@ -1,0 +1,13 @@
+{
+    "programid":"menprogram2",
+    "name":"MenLean",
+    "caloriesperday":2100,
+    "daysoftraining":5,
+    "trainer":"",
+    "workout":{"Running":"15min",
+               "ChestPress":"3x12",	
+               "Squats":"4x12",
+               "abPlanks":"120secs(orfailure)",
+               "PushUps":"4x5"
+            }
+}

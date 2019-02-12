@@ -1,0 +1,13 @@
+{
+    "programid":"womenprogram1",
+    "name":"WomenBulk",
+    "caloriesperday":2400,
+    "daysoftraining":4,
+    "trainer":"",
+    "workout":{"LegPress":"3x8",
+               "ChestPress":"3x8",	
+               "Squats":"4x8",
+               "ShoulderPress":"3x8",
+               "PullUps":"3x5"
+            }
+}		
