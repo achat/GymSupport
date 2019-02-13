@@ -73,7 +73,7 @@ public class Workout extends javax.swing.JDialog {
         private String caloriesperday;
         private String daysoftraining;
         private String trainer;
-        private Map<String, String> workout;
+        private Map workout;
         
         public WorkoutPlan(String programid, String name, String caloriesperday, String daysoftraining, String trainer, Map workout){
             this.programid = programid;
@@ -81,6 +81,9 @@ public class Workout extends javax.swing.JDialog {
             this.caloriesperday = caloriesperday;
             this.trainer = trainer;
             this.workout = workout;
+        }
+        public String getProgramid() {
+            return programid;
         }
         public Map getWorkout(){
             return workout;
@@ -91,33 +94,29 @@ public class Workout extends javax.swing.JDialog {
         public User getCurrentUser(){
             return currentUser;
         }
-
-        public String getProgramid() {
-            return programid;
-        }
-
-        public String getCaloriesperday() {
+        public String getCalories(){
             return caloriesperday;
         }
-
-        public String getDaysoftraining() {
+        public String getDaysoftraining(){
             return daysoftraining;
         }
-
+    
         public String getTrainer() {
             return trainer;
         }
+        
+       
         
         public String displayWorkout() {
             String workout = "Workout: " + name;
             return workout;
         }
         
-        public String info(){
+            public String info(){
             String s = this.displayWorkout();
-            s += "\nCalories per Day: " + this.getCaloriesperday();
+            s += "\nCalories per Day: " + this.getCalories();
             s += "\nDays of Training: " + this.getDaysoftraining();
-            s += "=================================================";
+            s += "\n=================================================";
             s += "\n"+"Exercises :";
             Set<String> keySet = getWorkout().keySet();
             for (String key : keySet) {
@@ -125,7 +124,6 @@ public class Workout extends javax.swing.JDialog {
             }
             return s;
         }
-        
     }
     
 
