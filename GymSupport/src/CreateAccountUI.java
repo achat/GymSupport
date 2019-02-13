@@ -32,7 +32,7 @@ public class CreateAccountUI extends javax.swing.JFrame {
         ImageIcon img = new ImageIcon(iconURL);
         this.setIconImage(img.getImage());
         initComponents();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(mainFrame);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

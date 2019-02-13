@@ -19,6 +19,7 @@ import javax.swing.JPanel;
  */
 public class GymSupportUI extends javax.swing.JFrame {
 
+    private User currentUser = null;
     CreateUserFromJson cufj=new CreateUserFromJson();
     
     public GymSupportUI() throws UnsupportedEncodingException, FileNotFoundException {
@@ -33,6 +34,14 @@ public class GymSupportUI extends javax.swing.JFrame {
         Image scaledImg = imgProfile.getImage().getScaledInstance(profilePhotoLabel.getWidth(), profilePhotoLabel.getHeight(),Image.SCALE_SMOOTH);
         profilePhotoLabel.setIcon(new ImageIcon(scaledImg));
         this.setResizable(false);
+    }
+    
+    public void setCurrentUser(User u) {
+        this.currentUser = u;
+    }
+    
+    public User getCurrentUser() {
+        return currentUser;
     }
     
     public JPanel getProfilePanel() {

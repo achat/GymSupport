@@ -36,7 +36,7 @@ public class LoginScreen extends javax.swing.JDialog {
         ImageIcon img = new ImageIcon(iconURL);
         this.setIconImage(img.getImage());
         initComponents();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(mainFrame);
         this.setModal(true);
         this.setVisible(true);
     }
@@ -141,6 +141,7 @@ public class LoginScreen extends javax.swing.JDialog {
         User u = UserList.getInstance().find(usernameText.getText(), pwdText.getText());
         if(u != null)
         {
+            this.mainFrame.setCurrentUser(u);
             this.mainFrame.getProfilePanel().setVisible(true);
             this.mainFrame.writeProfileInfo(u);
             //new MyProfile(u);

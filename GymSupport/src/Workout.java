@@ -21,15 +21,17 @@ import java.util.Map;
  */
 public class Workout extends javax.swing.JDialog {
 
+    GymSupportUI mainFrame;
     private ArrayList<WorkoutPlan> workoutList = new ArrayList();
     
     /**
      * Creates new form Workout
      */
-    public Workout(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public Workout(GymSupportUI mainFrame, boolean modal) {
+        super(mainFrame, modal);
+        this.mainFrame = mainFrame;
         initComponents();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(mainFrame);
         loadWorkout("/datasource/MenBulk.json");
         loadWorkout("/datasource/MenLean.json");
         loadWorkout("/datasource/WomenBulk.json");
@@ -50,6 +52,7 @@ public class Workout extends javax.swing.JDialog {
                 JsonElement e = p.next();
                 if (e.isJsonObject()) {
                     WorkoutPlan wp = gson.fromJson(e, WorkoutPlan.class);
+                    wp.setCurrentUser(mainFrame.getCurrentUser());
                     workoutList.add(wp);
                 }
             }
@@ -59,6 +62,8 @@ public class Workout extends javax.swing.JDialog {
     }
     
     private class WorkoutPlan {
+        
+        private User currentUser;
         
         private String programid;
         private String name;
@@ -75,9 +80,18 @@ public class Workout extends javax.swing.JDialog {
             this.workout = workout;
         }
         
+        public void setCurrentUser(User u) {
+            this.currentUser = u;
+        }
+        
         public String displayWorkout() {
             String workout = "Workout: " + name;
             return workout;
+        }
+        
+        public String info(){
+            String s = "User: " + this.currentUser.getGender() + "\nakjfhdjkfhsdf\nadjfgdhfgdhf\n";
+            return s;
         }
     }
     
@@ -107,6 +121,11 @@ public class Workout extends javax.swing.JDialog {
 
         workoutType.add(leanChoice);
         leanChoice.setText("Lean");
+        leanChoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leanChoiceActionPerformed(evt);
+            }
+        });
 
         workoutType.add(bulkChoice);
         bulkChoice.setText("Bulk");
@@ -157,6 +176,12 @@ public class Workout extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_closeBtnActionPerformed
 
+    private void leanChoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leanChoiceActionPerformed
+        // TODO add your handling code here:
+        
+        this.workoutPlanText.setText(workoutList.get(0).info());
+    }//GEN-LAST:event_leanChoiceActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -187,7 +212,7 @@ public class Workout extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Workout dialog = new Workout(new javax.swing.JFrame(), true);
+                Workout dialog = new Workout((GymSupportUI) new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
