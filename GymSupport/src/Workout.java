@@ -23,7 +23,8 @@ public class Workout extends javax.swing.JDialog {
 
     GymSupportUI mainFrame;
     private ArrayList<WorkoutPlan> workoutList = new ArrayList();
-    
+    private User currentUser;
+   
     /**
      * Creates new form Workout
      */
@@ -60,7 +61,8 @@ public class Workout extends javax.swing.JDialog {
             System.out.println(ex.getMessage());
         }
     }
-    
+
+  
     private class WorkoutPlan {
         
         private User currentUser;
@@ -79,10 +81,18 @@ public class Workout extends javax.swing.JDialog {
             this.trainer = trainer;
             this.workout = workout;
         }
-        
+        public Map getWorkout(){
+            return workout;
+        }
         public void setCurrentUser(User u) {
             this.currentUser = u;
         }
+        public User getCurrentUser(){
+            return currentUser;
+        }
+    
+       
+       
         
         public String displayWorkout() {
             String workout = "Workout: " + name;
@@ -90,9 +100,10 @@ public class Workout extends javax.swing.JDialog {
         }
         
         public String info(){
-            String s = "User: " + this.currentUser.getGender() + "\nakjfhdjkfhsdf\nadjfgdhfgdhf\n";
+            String s = this.displayWorkout()+"\n"+"Exercises :" +this.getWorkout() ;
             return s;
         }
+        
     }
     
 
@@ -129,6 +140,11 @@ public class Workout extends javax.swing.JDialog {
 
         workoutType.add(bulkChoice);
         bulkChoice.setText("Bulk");
+        bulkChoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bulkChoiceActionPerformed(evt);
+            }
+        });
 
         closeBtn.setText("Close");
         closeBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -178,9 +194,24 @@ public class Workout extends javax.swing.JDialog {
 
     private void leanChoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leanChoiceActionPerformed
         // TODO add your handling code here:
-        
-        this.workoutPlanText.setText(workoutList.get(0).info());
+        if(mainFrame.getCurrentUser().getGender().equals("1")){
+            this.workoutPlanText.setText(workoutList.get(1).info());
+        }
+            else{
+                this.workoutPlanText.setText(workoutList.get(3).info());
+            }
     }//GEN-LAST:event_leanChoiceActionPerformed
+
+    private void bulkChoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bulkChoiceActionPerformed
+        // TODO add your handling code here:
+        if(mainFrame.getCurrentUser().getGender().equals("1")){
+            this.workoutPlanText.setText(workoutList.get(0).info());
+        }
+        else{
+            this.workoutPlanText.setText(workoutList.get(2).info());
+        }
+        
+    }//GEN-LAST:event_bulkChoiceActionPerformed
 
     /**
      * @param args the command line arguments
