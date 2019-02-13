@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -81,6 +82,9 @@ public class Workout extends javax.swing.JDialog {
             this.trainer = trainer;
             this.workout = workout;
         }
+        public String getProgramid() {
+            return programid;
+        }
         public Map getWorkout(){
             return workout;
         }
@@ -93,11 +97,14 @@ public class Workout extends javax.swing.JDialog {
         public String getCalories(){
             return caloriesperday;
         }
-        public String getdaysoftraining(){
+        public String getDaysoftraining(){
             return daysoftraining;
         }
     
-       
+        public String getTrainer() {
+            return trainer;
+        }
+        
        
         
         public String displayWorkout() {
@@ -105,11 +112,18 @@ public class Workout extends javax.swing.JDialog {
             return workout;
         }
         
-        public String info(){
-            String s = this.displayWorkout()+"\n"+"Days of Training: "+this.getdaysoftraining()+"\nCalories per day : "+this.getCalories()+"\nExercises :" +this.getWorkout() ;
+            public String info(){
+            String s = this.displayWorkout();
+            s += "\nCalories per Day: " + this.getCalories();
+            s += "\nDays of Training: " + this.getDaysoftraining();
+            s += "\n=================================================";
+            s += "\n"+"Exercises :";
+            Set<String> keySet = getWorkout().keySet();
+            for (String key : keySet) {
+                s += "\n" + key + ": " + getWorkout().get(key);
+            }
             return s;
         }
-        
     }
     
 
