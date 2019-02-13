@@ -90,6 +90,12 @@ public class Workout extends javax.swing.JDialog {
         public User getCurrentUser(){
             return currentUser;
         }
+        public String getCalories(){
+            return caloriesperday;
+        }
+        public String getdaysoftraining(){
+            return daysoftraining;
+        }
     
        
        
@@ -100,7 +106,7 @@ public class Workout extends javax.swing.JDialog {
         }
         
         public String info(){
-            String s = this.displayWorkout()+"\n"+"Exercises :" +this.getWorkout() ;
+            String s = this.displayWorkout()+"\n"+"Days of Training: "+this.getdaysoftraining()+"\nCalories per day : "+this.getCalories()+"\nExercises :" +this.getWorkout() ;
             return s;
         }
         
