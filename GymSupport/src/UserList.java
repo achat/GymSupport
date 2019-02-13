@@ -62,4 +62,18 @@ public class UserList {
         }
         return 0;
     }
+    
+    public User checkUser(String username) 
+    {
+        for(User u: userList)
+        {
+            if (u.getUsername().equals(username))
+                    {
+                       return u;
+                    }
+        }
+        return null;
+    }
+    
+    
 }

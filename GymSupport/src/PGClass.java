@@ -1,6 +1,8 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,8 +21,10 @@ public class PGClass {
     private final String user = "postgres";
     private final String password = "sys";
     
+    private Connection conn;
+    
     private PGClass() {
-        
+        conn = connect();
     }
     
     public static PGClass getInstance() {
@@ -40,5 +44,20 @@ public class PGClass {
         }
  
         return conn;
+    }
+    
+    public Connection getConnection() {
+        return this.conn;
+    }
+    
+    public ResultSet executeSelectQuery(String q) {
+        ResultSet rs;
+        try {
+            Statement stmt = conn.createStatement();
+            rs = stmt.executeQuery(q);
+        } catch (Exception ex) {
+            return null;
+        }
+        return rs;            
     }
 }
