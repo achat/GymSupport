@@ -114,9 +114,7 @@
                               <Component id="jLabel1" min="-2" pref="364" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="147" max="32767" attributes="0"/>
-                      <Component id="profilePhotoLabel" min="-2" pref="107" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="258" max="32767" attributes="0"/>
                       <Component id="profileContainerPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -128,23 +126,15 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel1" min="-2" pref="83" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
-                                      <Component id="createAccountBtn" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                      <Component id="profilePhotoLabel" min="-2" pref="125" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="jLabel1" min="-2" pref="83" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                              <Component id="createAccountBtn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                               <Component id="logInBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="profileContainerPanel" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="39" max="32767" attributes="0"/>
                       <Component id="statusPanel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -244,7 +234,7 @@
                                       <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="usernameText" alignment="0" max="32767" attributes="0"/>
                                           <Component id="surnameText" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="ageText" alignment="0" pref="109" max="32767" attributes="0"/>
+                                          <Component id="ageText" alignment="0" max="32767" attributes="0"/>
                                           <Component id="heightText" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="emailText" alignment="1" min="-2" pref="109" max="-2" attributes="0"/>
@@ -262,16 +252,17 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="weightText" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                                               <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="nameText" alignment="0" pref="90" max="32767" attributes="0"/>
+                                                  <Component id="nameText" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="pwdText" alignment="0" max="32767" attributes="0"/>
                                                   <Component id="genderCombo" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
-                                      <Component id="requestWorkout" pref="173" max="32767" attributes="0"/>
+                                      <Component id="requestWorkout" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="updateProfileBtn" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="profilePhotoLabel" alignment="0" min="-2" pref="107" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -280,7 +271,9 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="162" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="profilePhotoLabel" min="-2" pref="125" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="usernameText" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -454,13 +447,13 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="updateProfileBtnActionPerformed"/>
                   </Events>
                 </Component>
+                <Component class="javax.swing.JLabel" name="profilePhotoLabel">
+                  <Properties>
+                    <Property name="toolTipText" type="java.lang.String" value=""/>
+                  </Properties>
+                </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="profilePhotoLabel">
-              <Properties>
-                <Property name="toolTipText" type="java.lang.String" value=""/>
-              </Properties>
-            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

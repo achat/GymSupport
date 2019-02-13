@@ -32,6 +32,7 @@ public class Workout extends javax.swing.JDialog {
     public Workout(GymSupportUI mainFrame, boolean modal) {
         super(mainFrame, modal);
         this.mainFrame = mainFrame;
+        currentUser = mainFrame.getCurrentUser();
         initComponents();
         this.setLocationRelativeTo(mainFrame);
         loadWorkout("/datasource/MenBulk.json");
@@ -214,7 +215,7 @@ public class Workout extends javax.swing.JDialog {
 
     private void leanChoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leanChoiceActionPerformed
         // TODO add your handling code here:
-        if(mainFrame.getCurrentUser().getGender().equals("1")){
+        if(mainFrame.getCurrentUser().getGender().equals("Male")){
             this.workoutPlanText.setText(workoutList.get(1).info());
         }
             else{
@@ -224,7 +225,7 @@ public class Workout extends javax.swing.JDialog {
 
     private void bulkChoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bulkChoiceActionPerformed
         // TODO add your handling code here:
-        if(mainFrame.getCurrentUser().getGender().equals("1")){
+        if(mainFrame.getCurrentUser().getGender().equals("Female")){
             this.workoutPlanText.setText(workoutList.get(0).info());
         }
         else{
