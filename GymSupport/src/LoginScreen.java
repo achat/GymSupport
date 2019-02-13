@@ -129,8 +129,8 @@ public class LoginScreen extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void logInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logInBtnActionPerformed
-        User u = Middleware.getInstance().checkLoginJSON(usernameText.getText());
-        if (u == null) {
+        int exists = UserList.getInstance().checkLoginUser(usernameText.getText());
+        if (exists == 0) {
             JOptionPane.showMessageDialog(null, "Unknown user!", "Failure", JOptionPane.WARNING_MESSAGE);
             usernameText.requestFocusInWindow();
             usernameText.selectAll();
@@ -138,8 +138,8 @@ public class LoginScreen extends javax.swing.JDialog {
             logInPanel.repaint();
             return;
         }
-        String pass = new String(pwdText.getPassword());
-        if (u.getPass().equals(pass)){
+        User u = UserList.getInstance().find(usernameText.getText(), pwdText.getText());
+        if(u != null){
             this.mainFrame.setCurrentUser(u);
             this.mainFrame.getProfilePanel().setVisible(true);
             this.mainFrame.writeProfileInfo(u);
