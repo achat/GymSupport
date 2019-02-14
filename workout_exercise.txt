@@ -1,0 +1,104 @@
+Leg Raises;ABS
+Crunches;ABS
+Sit ups;ABS
+Jackknife;ABS
+Hip Raise;ABS
+Russian Twist;ABS
+Deadlifts;BACK
+Seated Rows;BACK
+Barbell Shrugs;BACK
+Dumbell Shrugs;BACK
+Bent over row;BACK
+Pull ups;BACK
+Back Extensions;BACK
+T-Bar Bent Over row;BACK
+Curls;BICEPS
+Preacher;BICEPS
+Hammer;BICEPS
+Reverse Curls;BICEPS
+Low Pulley;BICEPS
+Underhand Grip Prone on;BICEPS
+Dumbell Biceps Curls;BICEPS
+Pulley Cable Crossover;BICEPS
+Toe Raises;CALVES
+One Leg Toe Raises;CALVES
+Seated Calf Raises;CALVES
+Dumbell Calf Jump;CALVES
+Standing Calf Raises;CALVES
+Seated Calf Raises;CALVES
+Barbell Calf Raises;CALVES
+Push Downs;TRICEPS
+Triceps KickBacks;TRICEPS
+Bar Triceps Extensions;TRICEPS
+Triceps Dips;TRICEPS
+Diamond Pushups;TRICEPS
+Ball Pull over;TRICEPS
+Bench Presses;CHEST
+Incline Presses;CHEST
+Dumbell Presses;CHEST
+Parallel Bar Dips;CHEST
+Cable Crossover Flys;CHEST
+Dumbell Flys;CHEST
+Push Ups;CHEST
+Peck Deck Flies;CHEST
+Back Presses;SHOULDER
+Seated Front Presses;SHOULDER
+Upright Row;SHOULDER
+Lateral Raises;SHOULDER
+Front Raises;SHOULDER
+Arnold Press;SHOULDER
+Barbell Front Raise;SHOULDER
+Squats;ABDUCTORS
+leg Extensions;ABDUCTORS
+Cable Back Kicks;ABDUCTORS
+Front Squats;ABDUCTORS
+Power Squats;ABDUCTORS
+Hack Squat;ABDUCTORS
+Bench Jump;ABDUCTORS
+Bulgarian Split Squat;ABDUCTORS
+Squats;ADDUCTORS
+leg Extensions;ADDUCTORS
+Cable Back Kicks;ADDUCTORS
+Front Squats;ADDUCTORS
+Power Squats;ADDUCTORS
+Hack Squat;ADDUCTORS
+Bench Jump;ADDUCTORS
+Bulgarian Split Squat;ADDUCTORS
+Squats;KNEES
+leg Extensions;KNEES
+Cable Back Kicks;KNEES
+Front Squats;KNEES
+Power Squats;KNEES
+Hack Squat;KNEES
+Bench Jump;KNEES
+Bulgarian Split Squat;KNEES
+Squats;GLUTES
+leg Extensions;GLUTES
+Cable Back Kicks;GLUTES
+Front Squats;GLUTES
+Power Squats;GLUTES
+Hack Squat;GLUTES
+Bench Jump;GLUTES
+Bulgarian Split Squat;GLUTES
+Squats;QUADS
+leg Extensions;QUADS
+Cable Back Kicks;QUADS
+Front Squats;QUADS
+Power Squats;QUADS
+Hack Squat;QUADS
+Bench Jump;QUADS
+Bulgarian Split Squat;QUADS
+Wrist Curls;FOREARMS
+Dumbell Wrist Curls;FOREARMS
+Dumbell Wrist Twist;FOREARMS
+Standing Wrist Curl;FOREARMS
+Sit ups;TOTAL BODY
+Leg Raises;TOTAL BODY
+Deadlifts;TOTAL BODY
+Seated Rows;TOTAL BODY
+Curls;TOTAL BODY
+Preacher Curls;TOTAL BODY
+Toe Raises;TOTAL BODY
+One Leg Toe Raises;TOTAL BODY
+Push Ups;TOTAL BODY
+Peck deck Flies;TOTAL BODY
