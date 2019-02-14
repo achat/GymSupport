@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.URL;
 import java.util.Locale;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -102,6 +103,7 @@ public class GymSupportUI extends javax.swing.JFrame {
         requestWorkout = new javax.swing.JButton();
         updateProfileBtn = new javax.swing.JButton();
         profilePhotoLabel = new javax.swing.JLabel();
+        fullSubscriptionBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 51, 51));
@@ -223,6 +225,14 @@ public class GymSupportUI extends javax.swing.JFrame {
 
         profilePhotoLabel.setToolTipText("");
 
+        fullSubscriptionBtn.setForeground(new java.awt.Color(0, 153, 51));
+        fullSubscriptionBtn.setText("Start Full Subscription");
+        fullSubscriptionBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fullSubscriptionBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout profileContainerPanelLayout = new javax.swing.GroupLayout(profileContainerPanel);
         profileContainerPanel.setLayout(profileContainerPanelLayout);
         profileContainerPanelLayout.setHorizontalGroup(
@@ -261,7 +271,10 @@ public class GymSupportUI extends javax.swing.JFrame {
                                         .addComponent(pwdText)
                                         .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(requestWorkout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(updateProfileBtn)
+                    .addGroup(profileContainerPanelLayout.createSequentialGroup()
+                        .addComponent(updateProfileBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(fullSubscriptionBtn))
                     .addComponent(profilePhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -305,7 +318,9 @@ public class GymSupportUI extends javax.swing.JFrame {
                     .addComponent(heightText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(requestWorkout))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                .addComponent(updateProfileBtn)
+                .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(updateProfileBtn)
+                    .addComponent(fullSubscriptionBtn))
                 .addContainerGap())
         );
 
@@ -402,6 +417,17 @@ public class GymSupportUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_weightTextActionPerformed
 
+    private void fullSubscriptionBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fullSubscriptionBtnActionPerformed
+        // TODO add your handling code here:
+        String subscriptionCode = JOptionPane.showInputDialog(this, "Enter 5-digit subscription code", "Subscription Code", JOptionPane.QUESTION_MESSAGE);
+        if (subscriptionCode.length() != 5){
+            JOptionPane.showMessageDialog(null, "Subscription failed!", "Failure", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "Subscription Successful!", "Bring it!!!", JOptionPane.INFORMATION_MESSAGE);
+        fullSubscriptionBtn.setEnabled(false);
+    }//GEN-LAST:event_fullSubscriptionBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -446,6 +472,7 @@ public class GymSupportUI extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField ageText;
     private javax.swing.JButton createAccountBtn;
     private javax.swing.JTextField emailText;
+    private javax.swing.JButton fullSubscriptionBtn;
     private javax.swing.JComboBox<String> genderCombo;
     private javax.swing.JFormattedTextField heightText;
     private javax.swing.JLabel jLabel1;
