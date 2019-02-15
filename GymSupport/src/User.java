@@ -18,6 +18,7 @@ public class User {
     private int height;
     private int weight;
     private String pass;
+    private int fullSubscription;
 
     public User(String username, String mail, String name, String surname, int age, String gender, int height, int weight,String pass) {
         this.username = username;
@@ -29,6 +30,19 @@ public class User {
         this.height = height;
         this.weight = weight;
         this.pass=pass;
+    }
+    
+    public User(String username, String mail, String name, String surname, int age, String gender, int height, int weight,String pass, int fullSubscription) {
+        this.username = username;
+        this.mail = mail;
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+        this.gender = gender;
+        this.height = height;
+        this.weight = weight;
+        this.pass=pass;
+        this.fullSubscription = fullSubscription;
     }
 
     public String getUsername() {
@@ -64,6 +78,13 @@ public class User {
     public int getWeight() {
         return weight;
     }
-    
+
+    public int getFullSubscription() {
+        return fullSubscription;
+    }
+
+    public void setFullSubscription(int fullSubscription) {
+        this.fullSubscription = fullSubscription;
+    }
     
 }

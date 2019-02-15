@@ -61,6 +61,13 @@ public class GymSupportUI extends javax.swing.JFrame {
         weightText.setText(String.valueOf(u.getWeight()));
         heightText.setText(String.valueOf(u.getHeight()));
     }
+    
+    public void setFullSubscriptionStatus(boolean b) {
+        fullSubscriptionBtn.setText("Full Subscription Active");
+        fullSubscriptionBtn.setEnabled(!b);
+        updateProfileBtn.setVisible(b);
+        Middleware.getInstance().setupLists();
+    }
             
 
     /**
@@ -185,6 +192,10 @@ public class GymSupportUI extends javax.swing.JFrame {
 
         jLabel8.setText("username");
 
+        usernameText.setForeground(new java.awt.Color(204, 51, 0));
+        usernameText.setDisabledTextColor(new java.awt.Color(204, 0, 0));
+        usernameText.setEnabled(false);
+
         jLabel7.setText("mail");
 
         jLabel9.setText("surname");
@@ -242,21 +253,26 @@ public class GymSupportUI extends javax.swing.JFrame {
                 .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(jLabel8)
+                    .addComponent(profilePhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(profileContainerPanelLayout.createSequentialGroup()
                         .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5))
-                        .addGap(15, 15, 15)
-                        .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(usernameText)
-                                .addComponent(surnameText)
-                                .addComponent(ageText)
-                                .addComponent(heightText, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(emailText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(profileContainerPanelLayout.createSequentialGroup()
+                                .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5))
+                                .addGap(15, 15, 15)
+                                .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(usernameText)
+                                        .addComponent(surnameText)
+                                        .addComponent(ageText)
+                                        .addComponent(heightText, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(emailText, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(updateProfileBtn))
                         .addGap(40, 40, 40)
                         .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(fullSubscriptionBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                             .addGroup(profileContainerPanelLayout.createSequentialGroup()
                                 .addGroup(profileContainerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
@@ -270,12 +286,7 @@ public class GymSupportUI extends javax.swing.JFrame {
                                         .addComponent(nameText)
                                         .addComponent(pwdText)
                                         .addComponent(genderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(requestWorkout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(profileContainerPanelLayout.createSequentialGroup()
-                        .addComponent(updateProfileBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fullSubscriptionBtn))
-                    .addComponent(profilePhotoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(requestWorkout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         profileContainerPanelLayout.setVerticalGroup(
@@ -405,8 +416,13 @@ public class GymSupportUI extends javax.swing.JFrame {
 
     private void requestWorkoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestWorkoutActionPerformed
         // TODO add your handling code here:
-        Workout w = new Workout(this, true);
-        w.setVisible(true);
+        if (currentUser.getFullSubscription() == 1) {
+            FullWorkout fw = new FullWorkout(this, true);
+            fw.setVisible(true);
+        } else {
+            Workout w = new Workout(this, true);
+            w.setVisible(true);
+        }
     }//GEN-LAST:event_requestWorkoutActionPerformed
 
     private void genderComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genderComboActionPerformed
@@ -421,9 +437,15 @@ public class GymSupportUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         String subscriptionCode = JOptionPane.showInputDialog(this, "Enter 5-digit subscription code", "Subscription Code", JOptionPane.QUESTION_MESSAGE);
         if (subscriptionCode.length() != 5){
-            JOptionPane.showMessageDialog(null, "Subscription failed!", "Failure", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error Subscription code!", "Failure", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        int result = PGClass.getInstance().executeUpdateQuery("UPDATE gym_user SET full_subscription = 1 where username = '" + currentUser.getUsername()+ "'");
+        if (result <= 0) {
+            JOptionPane.showMessageDialog(null, "Subscription failed! Call Gym Support administrator.", "Failure", JOptionPane.ERROR_MESSAGE);
+            return;
+        }        
         JOptionPane.showMessageDialog(null, "Subscription Successful!", "Bring it!!!", JOptionPane.INFORMATION_MESSAGE);
         fullSubscriptionBtn.setEnabled(false);
     }//GEN-LAST:event_fullSubscriptionBtnActionPerformed

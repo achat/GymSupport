@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -59,5 +60,15 @@ public class PGClass {
             return null;
         }
         return rs;            
+    }
+    
+    public int executeUpdateQuery(String q) {
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(q);
+            int rowsAffected = pstmt.executeUpdate();
+            return rowsAffected;
+        } catch (Exception ex) {
+            return -1;
+        }
     }
 }

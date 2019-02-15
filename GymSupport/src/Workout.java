@@ -225,7 +225,7 @@ public class Workout extends javax.swing.JDialog {
 
     private void bulkChoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bulkChoiceActionPerformed
         // TODO add your handling code here:
-        if(mainFrame.getCurrentUser().getGender().equals("Female")){
+        if(mainFrame.getCurrentUser().getGender().equals("Male")){
             this.workoutPlanText.setText(workoutList.get(0).info());
         }
         else{
