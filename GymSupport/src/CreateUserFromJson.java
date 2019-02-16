@@ -9,6 +9,11 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 
+
+/**
+ * @deprecated As of release 2.0, replaced by @Middleware
+ */
+@Deprecated
 public class CreateUserFromJson {
     
     public void createUserFromJson() throws UnsupportedEncodingException

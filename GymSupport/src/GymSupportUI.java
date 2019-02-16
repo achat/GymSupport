@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 public class GymSupportUI extends javax.swing.JFrame {
 
     private User currentUser = null;
-    CreateUserFromJson cufj=new CreateUserFromJson();
+    //CreateUserFromJson cufj=new CreateUserFromJson();
     
     public GymSupportUI() throws UnsupportedEncodingException, FileNotFoundException {
         URL iconURL = getClass().getResource("/resources/weightlifting.png");
@@ -30,7 +30,7 @@ public class GymSupportUI extends javax.swing.JFrame {
         initComponents();
         profileContainerPanel.setVisible(false);
         this.setLocationRelativeTo(null);
-        cufj.createUserFromJson();
+        Middleware.getInstance().createUserFromJson();
         ImageIcon imgProfile = new javax.swing.ImageIcon(getClass().getResource("/resources/user-black-shape.png"));
         Image scaledImg = imgProfile.getImage().getScaledInstance(profilePhotoLabel.getWidth(), profilePhotoLabel.getHeight(),Image.SCALE_SMOOTH);
         profilePhotoLabel.setIcon(new ImageIcon(scaledImg));

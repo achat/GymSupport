@@ -22,7 +22,7 @@ public class CreateAccountUI extends javax.swing.JFrame {
     private GymSupportUI mainFrame;
     private static CreateAccountUI instance;
 
-    SaveUserToJson sutj=new SaveUserToJson();
+    //SaveUserToJson sutj=new SaveUserToJson();
     /**
      * Creates new form CreateAccountUI
      */
@@ -266,7 +266,7 @@ public class CreateAccountUI extends javax.swing.JFrame {
             return;
         }
         try{
-            User u = sutj.saveUserToJson(usernameText.getText(),emailText.getText(),nameText.getText(),surnameText.getText(),Integer.parseInt(ageText.getText()),
+            User u = Middleware.getInstance().saveUserToJson(usernameText.getText(),emailText.getText(),nameText.getText(),surnameText.getText(),Integer.parseInt(ageText.getText()),
                     genderCombo.getSelectedItem().toString(),Integer.parseInt(heightText.getText()),Integer.parseInt(weightText.getText()),new String(pwdText.getPassword()));
             
             this.mainFrame.writeProfileInfo(u);

@@ -1,4 +1,3 @@
-
 import com.google.gson.Gson;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -8,6 +7,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
+
+/**
+ * @deprecated As of release 2.0, replaced by @Middleware
+ */
+@Deprecated
 public class SaveUserToJson {
     
     public User saveUserToJson(String username,String mail,String name,String surname,int age,String gender,int height,int weight,String pass)
