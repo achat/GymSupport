@@ -412,6 +412,20 @@ public class GymSupportUI extends javax.swing.JFrame {
 
     private void updateProfileBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateProfileBtnActionPerformed
         // TODO add your handling code here:
+        String q = "UPDATE gym_user set "
+                + "password = '" + new String(pwdText.getPassword()) + "', "
+                + "fname = '" + nameText.getText() + "', "
+                + "surname = '" + surnameText.getText() + "', "
+                + "email = '" + emailText.getText() + "', "
+                + "age = " + ageText.getText() + ", "
+                + "weight = " + weightText.getText() + ", "
+                + "height = " + heightText.getText() + " "
+                + "where username = '" + currentUser.getUsername() + "'";
+        int updated = PGClass.getInstance().executeUpdateQuery(q);
+        if (updated < 1) {
+            JOptionPane.showMessageDialog(null, "User update failed!", "Failure", JOptionPane.ERROR_MESSAGE);
+        }
+        JOptionPane.showMessageDialog(null, "User updated successfully!", "Update", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_updateProfileBtnActionPerformed
 
     private void requestWorkoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestWorkoutActionPerformed

@@ -266,11 +266,13 @@ public class CreateAccountUI extends javax.swing.JFrame {
             return;
         }
         try{
-            User u = Middleware.getInstance().saveUserToJson(usernameText.getText(),emailText.getText(),nameText.getText(),surnameText.getText(),Integer.parseInt(ageText.getText()),
-                    genderCombo.getSelectedItem().toString(),Integer.parseInt(heightText.getText()),Integer.parseInt(weightText.getText()),new String(pwdText.getPassword()));
-            
+            //User u = Middleware.getInstance().saveUserToJson(usernameText.getText(),emailText.getText(),nameText.getText(),surnameText.getText(),Integer.parseInt(ageText.getText()),
+            //        genderCombo.getSelectedItem().toString(),Integer.parseInt(heightText.getText()),Integer.parseInt(weightText.getText()),new String(pwdText.getPassword()));
+            User u = Middleware.getInstance().saveUserToDB(usernameText.getText(),emailText.getText(),nameText.getText(),surnameText.getText(),Integer.parseInt(ageText.getText()),
+                    genderCombo.getSelectedItem().toString(),Integer.parseInt(heightText.getText()),Integer.parseInt(weightText.getText()),new String(pwdText.getPassword()));            
             this.mainFrame.writeProfileInfo(u);
             this.mainFrame.getProfilePanel().setVisible(true);
+            this.mainFrame.setCurrentUser(u);
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Please enter your info correctly!", "Failure", JOptionPane.INFORMATION_MESSAGE);
             return;

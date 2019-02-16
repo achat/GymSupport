@@ -109,7 +109,7 @@ public class Middleware {
             u = new User(username,mail,name,surname,age,gender,height,weight,pass);
             JOptionPane.showMessageDialog(null, "Account Created!", "Success", JOptionPane.INFORMATION_MESSAGE);
             PGClass.getInstance().executeUpdateQuery("INSERT INTO gym_user (username, password, email, fname, surname, gender, age, weight, height)"
-                    + " values('" + username + "', '");
+                    + " values('" + username + "', '" + pass + "', '" + mail + "', '" + name + "', '" + surname + "', '" + gender + "', " + age + ", " + weight + ", " + height + ")");
             UserList.getInstance().addUser(u);
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Please enter your info correctly!", "Failure", JOptionPane.INFORMATION_MESSAGE);
