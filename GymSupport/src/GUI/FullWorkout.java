@@ -1,4 +1,10 @@
+package GUI;
 
+
+import gym.User;
+import gym.Exercise;
+import gym.Trainer;
+import middleware.PGClass;
 import java.sql.ResultSet;
 import java.util.List;
 import java.util.ArrayList;
@@ -6,6 +12,7 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ListSelectionModel;
+import middleware.MiddlewarePostgreSQL;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,6 +31,8 @@ public class FullWorkout extends javax.swing.JDialog {
     
     DefaultListModel expertiseListModel = new DefaultListModel();
     DefaultListModel workoutListModel = new DefaultListModel();
+    DefaultListModel exerciseListModel = new DefaultListModel();
+    
     DefaultComboBoxModel<String> trainerComboModel = new DefaultComboBoxModel<String>();
     /**
      * Creates new form FullWorkout
@@ -37,7 +46,7 @@ public class FullWorkout extends javax.swing.JDialog {
         
         expertiseList.setModel(expertiseListModel);
         expertiseList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        for (String expertise : Middleware.getInstance().getExpertise().keySet()) {
+        for (String expertise : MiddlewarePostgreSQL.getInstance().getExpertise().keySet()) {
             expertiseListModel.addElement(expertise);
         }
         
@@ -45,6 +54,8 @@ public class FullWorkout extends javax.swing.JDialog {
         
         workoutPlanList.setModel(workoutListModel);
         workoutPlanList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        
     }
     
     private List<Trainer> getTrainersByExpertise(String expertise) {
@@ -53,7 +64,7 @@ public class FullWorkout extends javax.swing.JDialog {
         try {
             ResultSet rs = PGClass.getInstance().executeSelectQuery("select trainer_code from trainer_expertise where expertise_code = '" + expertise + "'");
             while (rs.next()) {
-                trainers.add(Middleware.getInstance().getTrainers().get(rs.getString("trainer_code")));
+                trainers.add(MiddlewarePostgreSQL.getInstance().getTrainers().get(rs.getString("trainer_code")));
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -69,7 +80,7 @@ public class FullWorkout extends javax.swing.JDialog {
         try {
             ResultSet rs = PGClass.getInstance().executeSelectQuery("select workout_code from workout_expertise where expertise_code = '" + expertise + "'");
             while (rs.next()) {
-                workoutPlans.add(Middleware.getInstance().getWorkout().get(rs.getString("workout_code")));
+                workoutPlans.add(MiddlewarePostgreSQL.getInstance().getWorkout().get(rs.getString("workout_code")));
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -127,6 +138,11 @@ public class FullWorkout extends javax.swing.JDialog {
         jLabel2.setText("Workout Plan:");
 
         workoutPlanList.setToolTipText("");
+        workoutPlanList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                workoutPlanListValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(workoutPlanList);
 
         jLabel3.setText("Select Trainer:");
@@ -200,11 +216,13 @@ public class FullWorkout extends javax.swing.JDialog {
             workoutListModel.addElement(wp);
         }
         
+        
+        
     }//GEN-LAST:event_expertiseListValueChanged
 
     private void trainerComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainerComboActionPerformed
         // TODO add your handling code here:
-        Trainer tr = Middleware.getInstance().getTrainers().get(trainerCombo.getSelectedItem());
+        Trainer tr = MiddlewarePostgreSQL.getInstance().getTrainers().get(trainerCombo.getSelectedItem());
         if (tr == null) {
             return;
         }
@@ -213,6 +231,16 @@ public class FullWorkout extends javax.swing.JDialog {
         trainerProfileArea.setText(s);
     }//GEN-LAST:event_trainerComboActionPerformed
 
+    private void workoutPlanListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_workoutPlanListValueChanged
+        // TODO add your handling code here:
+      exercisesArea.removeAll();
+      exercisesArea.setText(getExerciseByName(workoutPlanList.getSelectedValue()).getComments());
+    }//GEN-LAST:event_workoutPlanListValueChanged
+ private Exercise getExerciseByName(String ename)
+ {
+     Exercise exer=new Exercise(0,"0",workoutPlanList.getSelectedValue(),workoutPlanList.getSelectedValue(),"You need to do "+workoutPlanList.getSelectedValue()+" twice a day for 15 minutes");
+     return exer;
+ }
     /**
      * @param args the command line arguments
      */

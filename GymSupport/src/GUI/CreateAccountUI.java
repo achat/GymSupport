@@ -1,3 +1,5 @@
+package GUI;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -9,6 +11,7 @@
  * @author nikos
  */
 
+import gym.User;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.URL;
@@ -17,6 +20,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.text.NumberFormatter;
+import middleware.MiddlewareJSON;
 
 public class CreateAccountUI extends javax.swing.JFrame {
     private GymSupportUI mainFrame;
@@ -266,7 +270,7 @@ public class CreateAccountUI extends javax.swing.JFrame {
             return;
         }
         try{
-            User u = Middleware.getInstance().saveUserToJson(usernameText.getText(),emailText.getText(),nameText.getText(),surnameText.getText(),Integer.parseInt(ageText.getText()),
+            User u = MiddlewareJSON.getInstance().saveUser(usernameText.getText(),emailText.getText(),nameText.getText(),surnameText.getText(),Integer.parseInt(ageText.getText()),
                     genderCombo.getSelectedItem().toString(),Integer.parseInt(heightText.getText()),Integer.parseInt(weightText.getText()),new String(pwdText.getPassword()));
             
             this.mainFrame.writeProfileInfo(u);

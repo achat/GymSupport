@@ -1,4 +1,10 @@
+package middleware;
 
+
+import gym.User;
+import gym.UserList;
+import gym.Trainer;
+import GUI.CreateAccountUI;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -27,89 +33,36 @@ import javax.swing.JOptionPane;
  *
  * @author vasilis
  */
-public class Middleware {
+public class MiddlewarePostgreSQL implements IMiddleware {
     
-    private static Middleware instance;
+    private static MiddlewarePostgreSQL instance;
     
     private Map<String, String> expertise = new HashMap<>();
     private Map<String, Trainer> trainers = new HashMap<>();
     private Map<String, String> workout = new HashMap<>();
     private Map<String, String> exercise = new HashMap<>();
     
-    private Middleware() {
+    private MiddlewarePostgreSQL() {
         
     }
     
-    public static Middleware getInstance() {
+    public static MiddlewarePostgreSQL getInstance() {
         if (instance == null) {
-            instance = new Middleware();
+            instance = new MiddlewarePostgreSQL();
         }
         return instance;
     }
     
-    public User checkLoginJSON(String user) {
-        User u = UserList.getInstance().checkUser(user);
-        if (u != null) {
-            return u;
-        }
-        return null;
-    }
     
-    public User saveUserToJson(String username,String mail,String name,String surname,int age,String gender,int height,int weight,String pass)
-    {
-        User u = null;
-        try{
-            u = new User(username,mail,name,surname,age,gender,height,weight,pass);
-            JOptionPane.showMessageDialog(null, "Account Created!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            Gson gson = new Gson();
-            String json = gson.toJson(u);
-            String filename= getClass().getResource("/datasource/Users.jsn").getPath();
-            FileWriter fw = new FileWriter(filename,true); //the true will append the new data
-            fw.write(json+"\n");//appends the string to the file
-            fw.close();
-            UserList.getInstance().addUser(u);
-        }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Please enter your info correctly!", "Failure", JOptionPane.INFORMATION_MESSAGE);
-        }catch (FileNotFoundException ex) {      
-            Logger.getLogger(CreateAccountUI.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex.getMessage());
-        }catch (IOException ex) {
-            Logger.getLogger(CreateAccountUI.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println(ex.getMessage());
-        }
-        
-        return u;
-    }
-    
-    public void createUserFromJson() throws UnsupportedEncodingException
-    {
-        try{
-            InputStream is = getClass().getResourceAsStream("/datasource/Users.jsn");
-            Reader r = new InputStreamReader(is, "UTF-8");
-            Gson gson = new GsonBuilder().create();
-            JsonStreamParser p = new JsonStreamParser(r);
-
-            while (p.hasNext()) {
-               JsonElement e = p.next();
-               if (e.isJsonObject()) {
-                   User u = gson.fromJson(e, User.class);
-                   UserList.getInstance().addUser(u);
-               }
-
-            }
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }
-    }
-    
-    public User saveUserToDB(String username,String mail,String name,String surname,int age,String gender,int height,int weight,String pass)
+    @Override
+    public User saveUser(String username,String mail,String name,String surname,int age,String gender,int height,int weight,String pass)
     {
         User u = null;
         try{
             u = new User(username,mail,name,surname,age,gender,height,weight,pass);
             JOptionPane.showMessageDialog(null, "Account Created!", "Success", JOptionPane.INFORMATION_MESSAGE);
             PGClass.getInstance().executeUpdateQuery("INSERT INTO gym_user (username, password, email, fname, surname, gender, age, weight, height)"
-                    + " values('" + username + "', '");
+                    + " values('" + username + "', '" + pass + "', '" + mail + "', '" + name + "', '" + surname + "', '" + gender + "', " + age + ", " + weight + ", " + height + ")");
             UserList.getInstance().addUser(u);
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Please enter your info correctly!", "Failure", JOptionPane.INFORMATION_MESSAGE);
@@ -121,7 +74,8 @@ public class Middleware {
         return u;
     }
     
-    public User checkLoginDB(String user) {
+    @Override
+    public User checkLogin(String user) {
         try {
             ResultSet rs = PGClass.getInstance().executeSelectQuery("Select * from gym_user where username = '" + user + "'");
             if (rs.next()) {
@@ -192,6 +146,11 @@ public class Middleware {
 
     public Map<String, String> getExercise() {
         return exercise;
+    }
+
+    @Override
+    public User createUser() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

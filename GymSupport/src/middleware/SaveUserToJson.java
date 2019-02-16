@@ -1,3 +1,8 @@
+package middleware;
+
+import gym.UserList;
+import gym.User;
+import GUI.CreateAccountUI;
 import com.google.gson.Gson;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
