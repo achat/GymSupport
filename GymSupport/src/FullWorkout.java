@@ -22,8 +22,9 @@ public class FullWorkout extends javax.swing.JDialog {
     GymSupportUI mainFrame;
     private User currentUser;
     
-    DefaultListModel dlf = new DefaultListModel();
-    DefaultComboBoxModel<String> comboModel = new DefaultComboBoxModel<String>();
+    DefaultListModel expertiseListModel = new DefaultListModel();
+    DefaultListModel workoutListModel = new DefaultListModel();
+    DefaultComboBoxModel<String> trainerComboModel = new DefaultComboBoxModel<String>();
     /**
      * Creates new form FullWorkout
      */
@@ -34,13 +35,16 @@ public class FullWorkout extends javax.swing.JDialog {
         initComponents();
         this.setLocationRelativeTo(mainFrame);
         
-        expertiseList.setModel(dlf);
+        expertiseList.setModel(expertiseListModel);
         expertiseList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         for (String expertise : Middleware.getInstance().getExpertise().keySet()) {
-            dlf.addElement(expertise);
+            expertiseListModel.addElement(expertise);
         }
         
-        trainerCombo.setModel(comboModel);
+        trainerCombo.setModel(trainerComboModel);
+        
+        workoutPlanList.setModel(workoutListModel);
+        workoutPlanList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     
     private List<Trainer> getTrainersByExpertise(String expertise) {
@@ -59,6 +63,21 @@ public class FullWorkout extends javax.swing.JDialog {
         
         return trainers;
     }
+    
+    private List<String> getWorkoutByExpertise (String expertise) {
+        List<String> workoutPlans = new ArrayList<>();
+        try {
+            ResultSet rs = PGClass.getInstance().executeSelectQuery("select workout_code from workout_expertise where expertise_code = '" + expertise + "'");
+            while (rs.next()) {
+                workoutPlans.add(Middleware.getInstance().getWorkout().get(rs.getString("workout_code")));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("DB Failure!");
+            return workoutPlans;
+        }
+        return workoutPlans;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,6 +94,13 @@ public class FullWorkout extends javax.swing.JDialog {
         trainerCombo = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         trainerProfileArea = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        workoutPlanList = new javax.swing.JList<>();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        exercisesArea = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -98,6 +124,19 @@ public class FullWorkout extends javax.swing.JDialog {
         trainerProfileArea.setRows(5);
         jScrollPane2.setViewportView(trainerProfileArea);
 
+        jLabel2.setText("Workout Plan:");
+
+        workoutPlanList.setToolTipText("");
+        jScrollPane3.setViewportView(workoutPlanList);
+
+        jLabel3.setText("Select Trainer:");
+
+        exercisesArea.setColumns(20);
+        exercisesArea.setRows(5);
+        jScrollPane4.setViewportView(exercisesArea);
+
+        jLabel4.setText("Exercises:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,12 +144,20 @@ public class FullWorkout extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(trainerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(trainerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane4))
+                    .addComponent(jLabel4))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -119,12 +166,21 @@ public class FullWorkout extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(trainerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(trainerCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -133,10 +189,17 @@ public class FullWorkout extends javax.swing.JDialog {
     private void expertiseListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_expertiseListValueChanged
         // TODO add your handling code here:
         List<Trainer> trainers = getTrainersByExpertise(expertiseList.getSelectedValue());
-        comboModel.removeAllElements();
+        trainerComboModel.removeAllElements();
         for (Trainer tr : trainers) {
-            comboModel.addElement(tr.getCode());
+            trainerComboModel.addElement(tr.getCode());
         }
+        
+        List<String> workoutPlans = getWorkoutByExpertise(expertiseList.getSelectedValue());
+        workoutListModel.removeAllElements();
+        for (String wp : workoutPlans) {
+            workoutListModel.addElement(wp);
+        }
+        
     }//GEN-LAST:event_expertiseListValueChanged
 
     private void trainerComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainerComboActionPerformed
@@ -193,11 +256,18 @@ public class FullWorkout extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea exercisesArea;
     private javax.swing.JList<String> expertiseList;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JComboBox<String> trainerCombo;
     private javax.swing.JTextArea trainerProfileArea;
+    private javax.swing.JList<String> workoutPlanList;
     // End of variables declaration//GEN-END:variables
 }

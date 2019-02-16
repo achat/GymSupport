@@ -445,8 +445,11 @@ public class GymSupportUI extends javax.swing.JFrame {
         if (result <= 0) {
             JOptionPane.showMessageDialog(null, "Subscription failed! Call Gym Support administrator.", "Failure", JOptionPane.ERROR_MESSAGE);
             return;
-        }        
+        }
+        currentUser.setFullSubscription(1);
         JOptionPane.showMessageDialog(null, "Subscription Successful!", "Bring it!!!", JOptionPane.INFORMATION_MESSAGE);
+        updateProfileBtn.setVisible(true);
+        setFullSubscriptionStatus(true);
         fullSubscriptionBtn.setEnabled(false);
     }//GEN-LAST:event_fullSubscriptionBtnActionPerformed
 

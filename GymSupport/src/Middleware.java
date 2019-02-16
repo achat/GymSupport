@@ -20,6 +20,7 @@ public class Middleware {
     
     private Map<String, String> expertise = new HashMap<>();
     private Map<String, Trainer> trainers = new HashMap<>();
+    private Map<String, String> workout = new HashMap<>();
     private Map<String, String> exercise = new HashMap<>();
     
     private Middleware() {
@@ -80,6 +81,11 @@ public class Middleware {
             trainers.put(rs.getString("trainer_code"), tr);
         }
         
+        rs = PGClass.getInstance().executeSelectQuery("Select workout_code, wname from workout");
+        while (rs.next()){
+            workout.put(rs.getString("workout_code"), rs.getString("wname"));
+        }
+        
         rs = PGClass.getInstance().executeSelectQuery("Select exercise_code, ename from exercise");
         while (rs.next()){
             exercise.put(rs.getString("exercise_code"), rs.getString("ename"));
@@ -99,6 +105,10 @@ public class Middleware {
 
     public Map<String, Trainer> getTrainers() {
         return trainers;
+    }
+    
+    public Map<String, String> getWorkout() {
+        return workout;
     }
 
     public Map<String, String> getExercise() {

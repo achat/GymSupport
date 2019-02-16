@@ -115,7 +115,8 @@ CREATE TABLE gym_user (
     age numeric,
     weight numeric,
     height numeric,
-    comments text
+    comments text,
+    full_subscription numeric(1,0) DEFAULT 0 NOT NULL
 );
 
 
@@ -149,11 +150,33 @@ ALTER SEQUENCE gym_user_uid_seq OWNED BY gym_user.uid;
 CREATE TABLE trainer_expertise (
     trainer_code character varying,
     expertise_code character varying,
-    comments text
+    comments text,
+    eid integer NOT NULL
 );
 
 
 ALTER TABLE trainer_expertise OWNER TO postgres;
+
+--
+-- Name: trainer_expertise_eid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE trainer_expertise_eid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE trainer_expertise_eid_seq OWNER TO postgres;
+
+--
+-- Name: trainer_expertise_eid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE trainer_expertise_eid_seq OWNED BY trainer_expertise.eid;
+
 
 --
 -- Name: trainers; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
@@ -249,11 +272,33 @@ ALTER SEQUENCE workout_exercise_wid_seq OWNED BY workout_exercise.wid;
 CREATE TABLE workout_expertise (
     workout_code character varying,
     expertise_code character varying,
-    comments text
+    comments text,
+    wid integer NOT NULL
 );
 
 
 ALTER TABLE workout_expertise OWNER TO postgres;
+
+--
+-- Name: workout_expertise_wid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE workout_expertise_wid_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE workout_expertise_wid_seq OWNER TO postgres;
+
+--
+-- Name: workout_expertise_wid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE workout_expertise_wid_seq OWNED BY workout_expertise.wid;
+
 
 --
 -- Name: workout_wid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -298,6 +343,13 @@ ALTER TABLE ONLY gym_user ALTER COLUMN uid SET DEFAULT nextval('gym_user_uid_seq
 
 
 --
+-- Name: eid; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY trainer_expertise ALTER COLUMN eid SET DEFAULT nextval('trainer_expertise_eid_seq'::regclass);
+
+
+--
 -- Name: tid; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -316,6 +368,13 @@ ALTER TABLE ONLY workout ALTER COLUMN wid SET DEFAULT nextval('workout_wid_seq':
 --
 
 ALTER TABLE ONLY workout_exercise ALTER COLUMN wid SET DEFAULT nextval('workout_exercise_wid_seq'::regclass);
+
+
+--
+-- Name: wid; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY workout_expertise ALTER COLUMN wid SET DEFAULT nextval('workout_expertise_wid_seq'::regclass);
 
 
 --
@@ -422,8 +481,8 @@ SELECT pg_catalog.setval('expertise_eid_seq', 9, true);
 -- Data for Name: gym_user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY gym_user (uid, username, password, email, fname, surname, gender, age, weight, height, comments) FROM stdin;
-1	vasilis	vts	vasilis@gym.support	vasilis	tester	Male	43	78	177	test db user
+COPY gym_user (uid, username, password, email, fname, surname, gender, age, weight, height, comments, full_subscription) FROM stdin;
+1	vasilis	vts	vasilis@gym.support	vasilis	tester	Male	43	78	177	test db user	1
 \.
 
 
@@ -438,8 +497,25 @@ SELECT pg_catalog.setval('gym_user_uid_seq', 1, true);
 -- Data for Name: trainer_expertise; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY trainer_expertise (trainer_code, expertise_code, comments) FROM stdin;
+COPY trainer_expertise (trainer_code, expertise_code, comments, eid) FROM stdin;
+JACK	CARDIO	\N	1
+JACK	STAMINA	\N	2
+JENNY	PILATES	\N	3
+JENNY	STRETCHING	\N	4
+BRENDA	STRETCHING	\N	5
+BRENDA	YOGA	\N	6
+JOHN	LISSOMENESS	\N	8
+JOHN	STRENGTH	\N	9
+JOHN	AEROBIC	\N	10
+BRENDA	AEROBIC	\N	11
 \.
+
+
+--
+-- Name: trainer_expertise_eid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('trainer_expertise_eid_seq', 11, true);
 
 
 --
@@ -447,6 +523,10 @@ COPY trainer_expertise (trainer_code, expertise_code, comments) FROM stdin;
 --
 
 COPY trainers (tid, trainer_code, tname, gender, profile, comments) FROM stdin;
+1	JOHN	John	Male	My philosophy focuses on continual lifelong learning as I work towards enhancing the well-being of my clients by empowering them with the knowledge, skills, support, guidance and resources to assist and inspire them on their journey to a healthier life. Together we will transform your quality of life through active participation in regular fitness activities and the integration of guided fitness programs, to make your health goals become a reality, in a caring, fun, and dynamic environment	\N
+4	JACK	Jack	Male	Our fitness is important and something we should all enjoy. My aim is to create a positive and fun experience for clients, as well as using the best of my knowledge and experience to help clients achieve their goals	\N
+3	BRENDA	Brenda	Female	Growing up I spent my weekends playing soccer, joining all sport team I possibly could in school, and practiced every other sport my small town had to offer.Always up for trying new activities once, and then again twice because I love it, my determination and curiosity has me never turning down a challenge, or an opportunity for new experiences. Time and time again, I’m reminded of the positive effects exercise has on my own physical and psychological well-being, and my appreciation for what our bodies and minds can achieve is ever increasing.As a Personal Trainer, I want to share my enthusiasm, encourage a happier lifestyle, and help you realize what your body is capable of. I believe that with the right training program, a bit of determination and support, anyone can achieve their goals	\N
+2	JENNY	Jane	Female	I try to help clients achieve a balanced lifestyle that encompasses all dimensions of health & wellness. With an extensive background in coaching, I try to create a training environment that not only motivates but also empowers individuals to continually challenge themselves in a fun and rewarding way	\N
 \.
 
 
@@ -606,8 +686,33 @@ SELECT pg_catalog.setval('workout_exercise_wid_seq', 104, true);
 -- Data for Name: workout_expertise; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY workout_expertise (workout_code, expertise_code, comments) FROM stdin;
+COPY workout_expertise (workout_code, expertise_code, comments, wid) FROM stdin;
+ABS	CARDIO	\N	11
+TOTAL_BODY	CARDIO	\N	12
+BACK	STRENGTH	\N	13
+BICEPS	STRENGTH	\N	14
+TRICEPS	STRENGTH	\N	15
+KNEES	STAMINA	\N	16
+ABDUCTORS	YOGA	\N	17
+ADDUCTORS	YOGA	\N	18
+HAMSTRINGS	STRETCHING	\N	19
+ABDUCTORS	STRETCHING	\N	20
+ADDUCTORS	STRETCHING	\N	21
+ABDUCTORS	PILATES	\N	22
+ADDUCTORS	PILATES	\N	23
+GLUTES	LISSOMENESS	\N	24
+GLUTES	LISSOMENESS	\N	25
+ABDUCTORS	LISSOMENESS	\N	26
+ADDUCTORS	LISSOMENESS	\N	27
+TOTAL_BODY	AEROBIC	\N	28
 \.
+
+
+--
+-- Name: workout_expertise_wid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('workout_expertise_wid_seq', 28, true);
 
 
 --
@@ -666,6 +771,14 @@ ALTER TABLE ONLY gym_user
 
 
 --
+-- Name: trainer_expertise_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY trainer_expertise
+    ADD CONSTRAINT trainer_expertise_pkey PRIMARY KEY (eid);
+
+
+--
 -- Name: trainers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -690,6 +803,14 @@ ALTER TABLE ONLY workout_exercise
 
 
 --
+-- Name: workout_expertise_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY workout_expertise
+    ADD CONSTRAINT workout_expertise_pkey PRIMARY KEY (wid);
+
+
+--
 -- Name: workout_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -706,6 +827,22 @@ ALTER TABLE ONLY workout
 
 
 --
+-- Name: trainer_expertise_expertise_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY trainer_expertise
+    ADD CONSTRAINT trainer_expertise_expertise_code_fkey FOREIGN KEY (expertise_code) REFERENCES expertise(expertise_code);
+
+
+--
+-- Name: trainer_expertise_trainer_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY trainer_expertise
+    ADD CONSTRAINT trainer_expertise_trainer_code_fkey FOREIGN KEY (trainer_code) REFERENCES trainers(trainer_code);
+
+
+--
 -- Name: workout_exercise_exercise_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -719,6 +856,22 @@ ALTER TABLE ONLY workout_exercise
 
 ALTER TABLE ONLY workout_exercise
     ADD CONSTRAINT workout_exercise_workout_code_fkey FOREIGN KEY (workout_code) REFERENCES workout(workout_code);
+
+
+--
+-- Name: workout_expertise_expertise_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY workout_expertise
+    ADD CONSTRAINT workout_expertise_expertise_code_fkey FOREIGN KEY (expertise_code) REFERENCES expertise(expertise_code);
+
+
+--
+-- Name: workout_expertise_workout_code_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY workout_expertise
+    ADD CONSTRAINT workout_expertise_workout_code_fkey FOREIGN KEY (workout_code) REFERENCES workout(workout_code);
 
 
 --
