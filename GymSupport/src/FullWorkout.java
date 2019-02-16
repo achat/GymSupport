@@ -24,6 +24,8 @@ public class FullWorkout extends javax.swing.JDialog {
     
     DefaultListModel expertiseListModel = new DefaultListModel();
     DefaultListModel workoutListModel = new DefaultListModel();
+    DefaultListModel exerciseListModel = new DefaultListModel();
+    
     DefaultComboBoxModel<String> trainerComboModel = new DefaultComboBoxModel<String>();
     /**
      * Creates new form FullWorkout
@@ -45,6 +47,8 @@ public class FullWorkout extends javax.swing.JDialog {
         
         workoutPlanList.setModel(workoutListModel);
         workoutPlanList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        
     }
     
     private List<Trainer> getTrainersByExpertise(String expertise) {
@@ -127,6 +131,11 @@ public class FullWorkout extends javax.swing.JDialog {
         jLabel2.setText("Workout Plan:");
 
         workoutPlanList.setToolTipText("");
+        workoutPlanList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                workoutPlanListValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(workoutPlanList);
 
         jLabel3.setText("Select Trainer:");
@@ -200,6 +209,8 @@ public class FullWorkout extends javax.swing.JDialog {
             workoutListModel.addElement(wp);
         }
         
+        
+        
     }//GEN-LAST:event_expertiseListValueChanged
 
     private void trainerComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainerComboActionPerformed
@@ -213,6 +224,16 @@ public class FullWorkout extends javax.swing.JDialog {
         trainerProfileArea.setText(s);
     }//GEN-LAST:event_trainerComboActionPerformed
 
+    private void workoutPlanListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_workoutPlanListValueChanged
+        // TODO add your handling code here:
+      exercisesArea.removeAll();
+      exercisesArea.setText(getExerciseByName(workoutPlanList.getSelectedValue()).getComments());
+    }//GEN-LAST:event_workoutPlanListValueChanged
+ private Exercise getExerciseByName(String ename)
+ {
+     Exercise exer=new Exercise(0,"0",workoutPlanList.getSelectedValue(),workoutPlanList.getSelectedValue(),"You need to do "+workoutPlanList.getSelectedValue()+" twice a day for 15 minutes");
+     return exer;
+ }
     /**
      * @param args the command line arguments
      */
