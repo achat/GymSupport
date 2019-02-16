@@ -25,6 +25,10 @@ public class Exercise {
         this.comments=comments;
     }
 
+    public Exercise(String name) {
+        this.name = name;
+    }
+    
     public int getId() {
         return id;
     }

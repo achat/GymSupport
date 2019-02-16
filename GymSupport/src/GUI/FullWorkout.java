@@ -234,13 +234,31 @@ public class FullWorkout extends javax.swing.JDialog {
     private void workoutPlanListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_workoutPlanListValueChanged
         // TODO add your handling code here:
       exercisesArea.removeAll();
-      exercisesArea.setText(getExerciseByName(workoutPlanList.getSelectedValue()).getComments());
+      List<Exercise> eList = getExerciseByName(workoutPlanList.getSelectedValue());
+      String s = "";
+      for (Exercise e : eList) {
+          s += e.getName() + "\n";
+      }
+      exercisesArea.setText(s);
     }//GEN-LAST:event_workoutPlanListValueChanged
- private Exercise getExerciseByName(String ename)
- {
-     Exercise exer=new Exercise(0,"0",workoutPlanList.getSelectedValue(),workoutPlanList.getSelectedValue(),"You need to do "+workoutPlanList.getSelectedValue()+" twice a day for 15 minutes");
-     return exer;
- }
+    
+    private List<Exercise> getExerciseByName(String wplan)
+    {
+        List<Exercise> exerciseList = new ArrayList<Exercise>();
+        try {
+            ResultSet rs = PGClass.getInstance().executeSelectQuery("SELECT ename from exercise where exercise_code in (select exercise_code from workout_exercise where "
+                + "workout_code in (select workout_code from workout where wname = '" + wplan + "'))");
+            //exerciseList.add(new Exercise(0,"0",workoutPlanList.getSelectedValue(),workoutPlanList.getSelectedValue(),"You need to do "+workoutPlanList.getSelectedValue()+" twice a day for 15 minutes\n"));
+            while (rs.next()) {
+                exerciseList.add(new Exercise(rs.getString("ename")));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            System.out.println(ex.getStackTrace());
+            System.out.println("DB Failure!");
+        }
+        return exerciseList;
+    }
     /**
      * @param args the command line arguments
      */

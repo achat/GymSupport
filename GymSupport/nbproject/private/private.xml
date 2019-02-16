@@ -3,17 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/middleware/MiddlewarePostgreSQL.java</file>
-            <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/middleware/IMiddleware.java</file>
-            <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/gym/Trainer.java</file>
-            <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/GUI/GymSupportUI.java</file>
-            <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/GUI/CreateAccountUI.java</file>
-            <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/middleware/PGClass.java</file>
-            <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/middleware/MiddlewareJSON.java</file>
-            <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/middleware/CreateUserFromJson.java</file>
-            <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/GUI/LoginScreen.java</file>
             <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/middleware/SaveUserToJson.java</file>
+            <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/gym/Exercise.java</file>
+            <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/middleware/IMiddleware.java</file>
+            <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/GUI/LoginScreen.java</file>
             <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/GUI/FullWorkout.java</file>
+            <file>file:/G:/Vasilis/mai.uom.gr/SoftwareEngineering/GymSupport/GymSupport/src/GUI/CreateAccountUI.java</file>
         </group>
     </open-files>
 </project-private>
