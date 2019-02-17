@@ -9,3 +9,10 @@ DB Initialization :
 4. run: createdb -h localhost -p 5432 -U postgres -E utf8 gym_support
 5. run: psql -h localhost -p 5432 -U postgres -d gym_support -f c:\temp\gym_support.sql
 6. OPTIONAL - connect to localhost with pgAdmin and administer gym_support DB
+
+CodeMR Analysis:
+Project metrics, exported with CodeMR Community (via Eclipse). Download file and execute:
+1. For master branch:   CodeMR Analysis\GymSupportRefactored\html\main_report\index.html
+2. For Pro branch:      CodeMR Analysis\GymSupportPro\html\main_report\index.html
+3. For FreeDemo branch: CodeMR Analysis\GymSupportFree\html\main_report\index.html
+
