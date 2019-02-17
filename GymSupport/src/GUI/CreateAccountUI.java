@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.text.NumberFormatter;
 import middleware.MiddlewareJSON;
+import middleware.MiddlewarePostgreSQL;
 
 public class CreateAccountUI extends javax.swing.JFrame {
     private GymSupportUI mainFrame;
@@ -270,11 +271,11 @@ public class CreateAccountUI extends javax.swing.JFrame {
             return;
         }
         try{
-            User u = MiddlewareJSON.getInstance().saveUser(usernameText.getText(),emailText.getText(),nameText.getText(),surnameText.getText(),Integer.parseInt(ageText.getText()),
-                    genderCombo.getSelectedItem().toString(),Integer.parseInt(heightText.getText()),Integer.parseInt(weightText.getText()),new String(pwdText.getPassword()));
-            
+            User u = MiddlewarePostgreSQL.getInstance().saveUser(usernameText.getText(),emailText.getText(),nameText.getText(),surnameText.getText(),Integer.parseInt(ageText.getText()),
+                    genderCombo.getSelectedItem().toString(),Integer.parseInt(heightText.getText()),Integer.parseInt(weightText.getText()),new String(pwdText.getPassword()));            
             this.mainFrame.writeProfileInfo(u);
             this.mainFrame.getProfilePanel().setVisible(true);
+            this.mainFrame.setCurrentUser(u);
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Please enter your info correctly!", "Failure", JOptionPane.INFORMATION_MESSAGE);
             return;
