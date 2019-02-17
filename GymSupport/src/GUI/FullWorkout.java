@@ -24,10 +24,10 @@ import middleware.MiddlewarePostgreSQL;
  *
  * @author vasilis
  */
-public class FullWorkout extends javax.swing.JDialog {
+public class FullWorkout extends Workout {
 
-    GymSupportUI mainFrame;
-    private User currentUser;
+    //GymSupportUI mainFrame;
+    //private User currentUser;
     
     DefaultListModel expertiseListModel = new DefaultListModel();
     DefaultListModel workoutListModel = new DefaultListModel();

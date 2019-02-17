@@ -440,7 +440,7 @@ public class GymSupportUI extends javax.swing.JFrame {
             FullWorkout fw = new FullWorkout(this, true);
             fw.setVisible(true);
         } else {
-            Workout w = new Workout(this, true);
+            FreeWorkout w = new FreeWorkout(this, true);
             w.setVisible(true);
         }
     }//GEN-LAST:event_requestWorkoutActionPerformed

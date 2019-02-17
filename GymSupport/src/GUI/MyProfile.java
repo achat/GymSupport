@@ -1,6 +1,7 @@
-package gym;
+package GUI;
 
 
+import gym.User;
 import javax.swing.JOptionPane;
 
 /*
@@ -13,6 +14,8 @@ import javax.swing.JOptionPane;
  *
  * @author nikos
  */
+
+@Deprecated
 public class MyProfile extends javax.swing.JFrame {
 
     /**
