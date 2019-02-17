@@ -11,7 +11,7 @@ DB Initialization :
 6. OPTIONAL - connect to localhost with pgAdmin and administer gym_support DB
 
 CodeMR Analysis:
-Project metrics, exported with CodeMR Community (via Eclipse). Download file and execute:
+Project metrics, exported with CodeMR Community (via Eclipse). Download file and open in web browser:
 1. For master branch:   CodeMR Analysis\GymSupportRefactored\html\main_report\index.html
 2. For Pro branch:      CodeMR Analysis\GymSupportPro\html\main_report\index.html
 3. For FreeDemo branch: CodeMR Analysis\GymSupportFree\html\main_report\index.html
