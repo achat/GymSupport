@@ -1,6 +1,8 @@
 # GymSupport
 
-DB Initialization:
+Required PostgreSQL Database. Instructions made for version 9.4. For a different version, you might need to customize some steps). 
+
+DB Initialization :
 1. Download gym_support.sql in a temp folder (e.g. C:\temp\)
 2. Go to C:\..\PostgreSQL\9.4\bin
 3. Open command window here (Shift _ RClick)
