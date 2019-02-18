@@ -1,12 +1,12 @@
 QualifiedName;Element;Quality Attributes;LOC;Coupling;Complexity;Size;Lack of Cohesion;CBO;SRFC;DIT;NOC;WMC;LOC;CMLOC;NOF;NOSF;NOM;NOSM;NORM;LCOM;LCAM;LTCC;ATFD;SI;RFC;
 GSFree
 <Package>;;;1102;low;low;low-medium;low;;;;;123;1102;;;;;;;;;;;;;
-CreateAccountUI;CreateAccountUI;;235;low;medium-high;low-medium;low;3;53;6;0;13;235;208;25;1;5;1;0;0.859;0.389;0.0;0;0.0;81;
-CreateUserFromJson;CreateUserFromJson;;14;low-medium;low;low;low;6;11;1;0;4;14;13;0;0;1;0;0;0.0;0.0;0.0;0;0.0;13;
-GymSupportUI;GymSupportUI;;360;low;medium-high;medium-high;low;5;78;6;0;19;360;326;33;0;12;1;0;0.915;0.577;0.867;1;0.0;101;
-LoginScreen;LoginScreen;;117;low;medium-high;low-medium;low;3;43;6;0;6;117;108;8;0;4;0;0;0.75;0.5;1.0;0;0.0;59;
-MyProfile;MyProfile;;115;low;medium-high;low-medium;low;1;36;6;0;4;115;104;10;0;4;0;0;0.2;0.417;0.0;1;0.0;38;
-SaveUserToJson;SaveUserToJson;;22;low;low;low;low;3;14;1;0;4;22;21;0;0;1;0;0;0.0;0.0;0.0;0;0.0;16;
-User;User;;38;low;low;low;low;0;0;1;0;10;38;28;9;0;10;0;0;0.889;0.6;0.8;0;0.0;10;
-UserList;UserList;;27;low;low;low;low;1;4;1;0;15;27;24;1;1;6;1;0;0.6;0.476;0.333;1;0.0;11;
-Workout;Workout;;174;low-medium;medium-high;low-medium;low;6;54;6;0;19;174;123;9;0;6;1;0;0.778;0.6;1.0;2;0.0;64;
+CreateAccountUI;CreateAccountUI;;235;low;medium-high;low-medium;low;3;53;6;0;13;235;208;25;1;5;1;0;0,859;0,389;0,0;0;0,0;81;
+CreateUserFromJson;CreateUserFromJson;;14;low-medium;low;low;low;6;11;1;0;4;14;13;0;0;1;0;0;0,0;0,0;0,0;0;0,0;13;
+GymSupportUI;GymSupportUI;;360;low;medium-high;medium-high;low;5;78;6;0;19;360;326;33;0;12;1;0;0,915;0,577;0,867;1;0,0;101;
+LoginScreen;LoginScreen;;117;low;medium-high;low-medium;low;3;43;6;0;6;117;108;8;0;4;0;0;0,75;0,5;1,0;0;0,0;59;
+MyProfile;MyProfile;;115;low;medium-high;low-medium;low;1;36;6;0;4;115;104;10;0;4;0;0;0,2;0,417;0,0;1;0,0;38;
+SaveUserToJson;SaveUserToJson;;22;low;low;low;low;3;14;1;0;4;22;21;0;0;1;0;0;0,0;0,0;0,0;0;0,0;16;
+User;User;;38;low;low;low;low;0;0;1;0;10;38;28;9;0;10;0;0;0,889;0,6;0,8;0;0,0;10;
+UserList;UserList;;27;low;low;low;low;1;4;1;0;15;27;24;1;1;6;1;0;0,6;0,476;0,333;1;0,0;11;
+Workout;Workout;;174;low-medium;medium-high;low-medium;low;6;54;6;0;19;174;123;9;0;6;1;0;0,778;0,6;1,0;2;0,0;64;
