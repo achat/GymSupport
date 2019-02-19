@@ -17,5 +17,5 @@ Project metrics, exported with CodeMR Community (via Eclipse). Download file and
 3. For FreeDemo branch: CodeMR Analysis\GymSupportFree\html\main_report\index.html
 
 Run Application:
-Unzip: https://github.com/mai19079/GymSupport/blob/master/RunGymSupport.zip
-Run GymSupport.jar
+1. Unzip: https://github.com/mai19079/GymSupport/blob/master/RunGymSupport.zip
+2. Run GymSupport.jar
